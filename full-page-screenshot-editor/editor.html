@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Full Page Screenshot Editor</title>
+  <link rel="stylesheet" href="editor.css">
+  <script type="module" src="editor.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="brand"><span class="brand-icon" aria-hidden="true">▣</span><div><strong>Full Page</strong><span class="brand-subtitle">SCREENSHOT EDITOR</span></div></div>
+    <div class="document"><h1 id="document-title">Ваш снимок</h1><p id="document-info">Загрузка локального изображения…</p></div>
+    <span class="privacy"><span></span> Только на этом устройстве</span>
+    <button id="library-button" class="icon-button" title="Локальные снимки">Снимки</button>
+    <button id="clear-all-button" class="danger" title="Удалить все снимки, метаданные и временные данные расширения">Очистить всё</button>
+  </header>
+
+  <nav class="toolbar" aria-label="Инструменты редактора">
+    <div class="tool-group">
+      <button id="crop-button" class="tool" disabled><span aria-hidden="true">⌗</span> Обрезать <kbd>C</kbd></button>
+      <button id="apply-button" class="primary" hidden>Применить <kbd>↵</kbd></button>
+      <button id="cancel-crop-button" hidden>Отмена <kbd>Esc</kbd></button>
+      <button id="reset-button" disabled title="Вернуть исходный снимок">Сбросить</button>
+    </div>
+    <div class="tool-group zoom-group">
+      <button id="zoom-out" class="square" disabled aria-label="Уменьшить масштаб">−</button>
+      <label class="sr-only" for="zoom">Масштаб просмотра</label>
+      <select id="zoom" disabled><option value="fit">По ширине</option><option value="0.1">10%</option><option value="0.25">25%</option><option value="0.5">50%</option><option value="0.75">75%</option><option value="1">100%</option><option value="1.5">150%</option><option value="2">200%</option><option value="3">300%</option></select>
+      <button id="zoom-in" class="square" disabled aria-label="Увеличить масштаб">+</button>
+    </div>
+    <div class="tool-group export-group">
+      <button id="copy-button" disabled>Копировать PNG</button>
+      <label class="sr-only" for="format">Формат экспорта</label>
+      <select id="format"><option value="png">PNG · без потерь</option><option value="jpeg">JPEG · 94%</option></select>
+      <button id="save-button" class="primary" disabled><span aria-hidden="true">↓</span> Сохранить</button>
+      <button id="parts-button" disabled title="Дополнительный вариант: сохранить изображение отдельными частями">Частями</button>
+    </div>
+  </nav>
+
+  <main class="main">
+    <section id="workspace" class="workspace" aria-label="Изображение и область обрезки" tabindex="0">
+      <div id="empty" class="empty"><span class="empty-icon">▣</span><h2 id="empty-title">Открываем снимок</h2><p id="empty-text">Изображение хранится локально в Chrome.</p><button id="diagnostics-button" hidden>Скачать диагностику</button></div>
+      <div id="stage-shell" class="stage-shell" hidden><div id="stage" class="stage">
+        <div id="selection" class="selection" hidden>
+          <span id="selection-label" class="selection-label"></span>
+          <i data-handle="nw"></i><i data-handle="n"></i><i data-handle="ne"></i><i data-handle="e"></i><i data-handle="se"></i><i data-handle="s"></i><i data-handle="sw"></i><i data-handle="w"></i>
+        </div>
+      </div></div>
+    </section>
+
+    <aside class="inspector">
+      <div class="inspector-heading"><span class="eyebrow">РАБОЧАЯ ОБЛАСТЬ</span><span class="dot"></span></div>
+      <h2 id="inspector-title">Оригинал</h2><p id="crop-help" class="muted">Нажмите «Обрезать» и выделите нужный участок мышью.</p>
+      <div class="dimensions"><span id="size-width">—</span><span class="times">×</span><span id="size-height">—</span><small>пикселей оригинала</small></div>
+      <div class="coordinates"><label>X<input id="rect-x" type="number" min="0" step="1" disabled></label><label>Y<input id="rect-y" type="number" min="0" step="1" disabled></label><label>Ширина<input id="rect-width" type="number" min="1" step="1" disabled></label><label>Высота<input id="rect-height" type="number" min="1" step="1" disabled></label></div>
+      <div class="inspector-note"><strong>Каждый пиксель на месте</strong><p>Масштаб меняет только просмотр. Экспорт сохраняет полное разрешение выбранной области.</p></div>
+      <div id="parts-panel" hidden><h3>Экспорт по частям</h3><p id="parts-info" class="muted"></p><button id="save-all" class="wide">Скачать все части</button><div id="parts-list" class="parts-list"></div></div>
+      <div class="shortcuts"><span>Выделение <kbd>C</kbd></span><span>Подтвердить <kbd>Enter</kbd></span><span>Отменить <kbd>Esc</kbd></span><span>Точный сдвиг <kbd>↑ ↓ ← →</kbd></span></div>
+    </aside>
+  </main>
+
+  <footer class="statusbar"><span id="status" role="status" aria-live="polite">Чтение IndexedDB…</span><div><progress id="export-progress" max="1" value="0" hidden></progress><button id="cancel-export" hidden>Отменить экспорт</button><span id="zoom-label">—</span></div></footer>
+  <dialog id="library"><div class="dialog-header"><h2>Локальные снимки</h2><button id="close-library" aria-label="Закрыть">✕</button></div><p class="muted">Закрытие редактора сохраняет оригиналы. Снимки старше 24 часов удаляются при следующем захвате.</p><div class="library-actions"><button id="library-clear-all" class="danger">Удалить все снимки и данные</button><button id="clear-clipboard">Очистить буфер обмена</button></div><p class="muted">Полная очистка удаляет оригиналы, кадры, названия страниц и диагностику, отменяет захват и сбрасывает все открытые редакторы. Скачанные файлы остаются в выбранных вами папках. Буфер обмена очищается отдельной кнопкой; она заменяет его текущее содержимое.</p><div id="library-list"></div></dialog>
+</body>
+</html>

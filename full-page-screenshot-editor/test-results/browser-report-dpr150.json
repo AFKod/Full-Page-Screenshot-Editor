@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-17T09:04:09.156Z",
+  "passed": [
+    "Real action + activeTab capture, DOM/CSS/scroll restoration on success",
+    "Full-page stitching + pixel colors + frame seams at DPR 1.5 (3840×5250)",
+    "Mouse crop, exact original-pixel fields, zoom invariance and apply",
+    "PNG download with exact 400×300 original-pixel crop",
+    "JPEG download with exact 400×300 original-pixel crop",
+    "PNG clipboard write from editor user gesture",
+    "Escape cancellation restores scroll, styles and lazy image attributes",
+    "Capture at Chrome zoom 125% + native DPR 1.5 (inferred scale 1.875)",
+    "Capture API error restores page, reports error and removes incomplete frames",
+    "Failed capture can export numeric diagnostics without image or page URL",
+    "Rounded-down PNG regression: real capture, complete stitch, valid last pixel, no resampling",
+    "20,000 px virtualized editor, lossless split export, final part dimensions and clipboard size guard",
+    "Horizontal + vertical full-page grid stitching and restoration of both scroll axes",
+    "Public page https://pipl.io/: full capture 3840×16816 at native DPR 1.5",
+    "Restricted chrome:// page reports a clear error without injection",
+    "No uncaught editor page errors"
+  ],
+  "failed": [],
+  "browser": "155.0.8059.80",
+  "hostPlatform": "darwin",
+  "nativeDPR": 1.5,
+  "windowSize": "2560,1440",
+  "classicScrollbars": false,
+  "fixtureViewport": {
+    "innerWidth": 2560,
+    "innerHeight": 1353,
+    "clientWidth": 2560,
+    "clientHeight": 1353,
+    "dpr": 1.5
+  },
+  "publicPage": {
+    "width": 3840,
+    "height": 16816,
+    "frames": 9,
+    "diagnostics": {
+      "version": "1.0.1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 11211,
+        "viewportWidth": 2560,
+        "viewportHeight": 1353,
+        "visualWidth": 2560,
+        "visualHeight": 1353.3333740234375,
+        "innerWidth": 2560,
+        "innerHeight": 1353,
+        "dpr": 1.5,
+        "visualScale": 1
+      },
+      "scale": 1.5,
+      "lastFrame": {
+        "index": 8,
+        "row": 8,
+        "col": 0,
+        "cssX": 0,
+        "cssY": 9857.3330078125,
+        "originX": 0,
+        "originY": 14786,
+        "pixelWidth": 3840,
+        "pixelHeight": 2030,
+        "bitmapWidth": 3840,
+        "bitmapHeight": 2030
+      },
+      "edgeAdjustment": {
+        "right": 0,
+        "bottom": 1
+      }
+    }
+  }
+}

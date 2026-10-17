@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-17T09:00:06.511Z",
+  "passed": [
+    "Real action + activeTab capture, DOM/CSS/scroll restoration on success",
+    "Full-page stitching + pixel colors + frame seams at DPR 1.25 (1600×4375)",
+    "Mouse crop, exact original-pixel fields, zoom invariance and apply",
+    "PNG download with exact 400×300 original-pixel crop",
+    "JPEG download with exact 400×300 original-pixel crop",
+    "PNG clipboard write from editor user gesture",
+    "Escape cancellation restores scroll, styles and lazy image attributes",
+    "Capture at Chrome zoom 125% + native DPR 1.25 (inferred scale 1.5625)",
+    "Capture API error restores page, reports error and removes incomplete frames",
+    "Failed capture can export numeric diagnostics without image or page URL",
+    "Rounded-down PNG regression: real capture, complete stitch, valid last pixel, no resampling",
+    "20,000 px virtualized editor, lossless split export, final part dimensions and clipboard size guard",
+    "Horizontal + vertical full-page grid stitching and restoration of both scroll axes",
+    "Restricted chrome:// page reports a clear error without injection",
+    "No uncaught editor page errors"
+  ],
+  "failed": [],
+  "browser": "155.0.8059.80",
+  "hostPlatform": "darwin",
+  "nativeDPR": 1.25,
+  "windowSize": "1280,1000",
+  "classicScrollbars": false
+}

@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Full Page Screenshot Editor",
+  "version": "1.0.3",
+  "description": "Локальный захват всей страницы, обрезка и экспорт PNG/JPEG без сервера.",
+  "minimum_chrome_version": "110",
+  "permissions": ["activeTab", "scripting", "clipboardWrite"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": {
+    "default_title": "Снять всю страницу · повторное нажатие отменяет захват",
+    "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+  },
+  "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'none'; connect-src 'self'; img-src 'self' blob: data:;" }
+}
